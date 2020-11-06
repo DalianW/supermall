@@ -27,7 +27,8 @@
   justify-content: space-between;
   text-align: center;
   width:100%;
-  padding:20px 10px;
+  padding:20px 8px;
+  border-bottom:5px solid #f5f5f5;
 }
 .recommed-item{
   flex:1;
