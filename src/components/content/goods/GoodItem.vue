@@ -1,15 +1,13 @@
 <template>
-  <div class="good-item">
-    <a :href="goodsItem.link">
-      <img :src="goodsItem.show.img" alt="">
-      <div class="text">
-        <p class="title">{{goodsItem.title}}</p>
-        <p class="bottom">
-          <span class="price">{{goodsItem.price}}</span>
-          <span class="collect">{{goodsItem.cfav}}</span>
-        </p>
-      </div>
-    </a>
+  <div class="good-item" @click="itemClick(goodsItem.iid)">
+    <img :src="showImage" alt="" @load="imageLoad">
+    <div class="text">
+      <p class="title">{{goodsItem.title}}</p>
+      <p class="bottom">
+        <span class="price">{{goodsItem.price}}</span>
+        <span class="collect">{{goodsItem.cfav}}</span>
+      </p>
+    </div>
   </div>
 </template>
 
@@ -20,6 +18,19 @@
       goodsItem: {
         type: Object,
         default: () => {}
+      }
+    },
+    computed: {
+      showImage() {
+        return this.goodsItem.image || this.goodsItem.show.img
+      }
+    },
+    methods: {
+      imageLoad() {
+        this.$bus.$emit('itemImgLoad')
+      },
+      itemClick(id) {
+        this.$router.push('/detail/' + id)
       }
     }
   }
